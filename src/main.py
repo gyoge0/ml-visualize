@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import models, layers
 from tensorflow.keras.datasets import mnist
+import numpy as np
 
 # %%
 tf.keras.backend.clear_session()
@@ -16,11 +17,13 @@ model = models.Sequential(
     [
         layers.Flatten(input_shape=(28, 28)),
         layers.Dense(16, activation="relu"),
+        layers.Dense(16, activation="relu"),
     ]
 )
 model.compile(
     optimizer="adam",
     loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    metrics=["accuracy"]
 )
 model.summary()
 
@@ -30,3 +33,7 @@ history = model.fit(
     y_train,
     epochs=5,
 )
+
+# %%
+np.save("weights/second_first", model.layers[1].weights[0].numpy())
+np.save("weights/third_second", model.layers[2].weights[0].numpy())
