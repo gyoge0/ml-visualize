@@ -23,7 +23,7 @@ model = models.Sequential(
 model.compile(
     optimizer="adam",
     loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-    metrics=["accuracy"]
+    metrics=["accuracy"],
 )
 model.summary()
 
@@ -35,5 +35,5 @@ history = model.fit(
 )
 
 # %%
-np.save("weights/second_first", model.layers[1].weights[0].numpy())
-np.save("weights/third_second", model.layers[2].weights[0].numpy())
+model.save("model")
+
