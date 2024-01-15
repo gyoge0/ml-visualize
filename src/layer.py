@@ -2,8 +2,13 @@ from typing import Tuple
 
 from manim import *
 from typing_extensions import Self
+import tensorflow as tf
+import numpy as np
 
-from neuron import Neuron
+
+class Neuron(Circle):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 
 class EllipsisBetween(DashedLine):

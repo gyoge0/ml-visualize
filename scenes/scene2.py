@@ -1,5 +1,5 @@
-from ..visualize.network import *
-from ..visualize.animations import *
+from network import *
+from animations import *
 from manim import *
 
 
