@@ -1,10 +1,7 @@
-from typing import Tuple
-
-from manim import *
-from typing_extensions import Self
 from layer import *
-import tensorflow as tf
 import numpy as np
+
+from neuron import Neuron
 
 
 def get_color_on_gradient(

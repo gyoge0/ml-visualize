@@ -1,10 +1,10 @@
-from animations import (
+from ..visualize.animations import (
     CreateGroup,
     CreateWeightsWithColor,
     AnimateWeightColors,
     CreateGroupCascade,
 )
-from layer import *
+from ..visualize.layer import *
 
 
 class CreateNeuralNetwork(Scene):
