@@ -1,31 +1,30 @@
 from typing import Iterable
 
-import numpy as np
-from manim import PURE_BLUE, WHITE, PURE_RED, AnimationGroup, VMobject, Create
+from manim import *
 
-from network import Layer
-
-
-def get_color_on_gradient(
-    value,
-    max_value,
-    negative=PURE_BLUE,
-    zero=WHITE,
-    positive=PURE_RED,
-):
-    normalized_value = value / max_value
-
-    if normalized_value < 0:
-        new_color = zero.interpolate(negative, alpha=np.abs(normalized_value))
-    else:
-        new_color = zero.interpolate(positive, alpha=normalized_value)
-
-    return new_color
+from layer import Layer
 
 
 class CreateGroup(AnimationGroup):
     def __init__(self, group: Iterable[VMobject], **kwargs):
-        animations = [Create(item) for item in group]
+        animations = (Create(item) for item in group)
+        super().__init__(*animations, **kwargs)
+
+
+class CreateGroupCascade(AnimationGroup):
+    def __init__(self, group: Iterable[VMobject], **kwargs):
+        animations = []
+
+        # recursively add all sub items
+        # noinspection PyShadowingNames
+        def add_items(group):
+            for item in group:
+                if isinstance(item, VGroup):
+                    add_items(item)
+                else:
+                    animations.append(Create(item))
+        add_items(group)
+
         super().__init__(*animations, **kwargs)
 
 
