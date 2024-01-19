@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from manim import *
 from animations import *
 from layer import *
+import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import models
 
